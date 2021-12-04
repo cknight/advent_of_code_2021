@@ -1,0 +1,66 @@
+const a: string = await Deno.readTextFile("./day3Input.txt");
+const b = a.split('\n');
+
+const o = new Array(b[0].length).fill(0);
+const g = new Array(b[0].length).fill(0);
+const e = new Array(b[0].length).fill(0);
+
+b.forEach(n => {
+    for(let i=0; i < n.length; i++) {
+        n[i] === '1' ? o[i]++ : o[i]--;
+    }
+});
+
+for (let i=0; i < o.length; i++) {
+    if (o[i] > 0) {
+        g[i] = 1;
+        e[i] = 0;
+    } else {
+        g[i] = 0;
+        e[i] = 1;
+    }
+}
+const gamma = parseInt(g.join(''), 2);
+const epsilon = parseInt(e.join(''), 2);
+
+//part two
+let workingArray = [...b];
+let digitPos = 0;
+while(workingArray.length > 1) {
+    const c = 0;
+    const newWorkingArray = [];
+    let count = 0;
+    for(let i=0; i < workingArray.length; i++) {
+        workingArray[i][digitPos] == '1' ? count++ : count--;
+    }
+    let matchTo = count < 0 ? '0' : '1';
+    for(let i=0; i < workingArray.length; i++) {
+        if (workingArray[i][digitPos] == matchTo) {
+            newWorkingArray.push(workingArray[i]);
+        }
+    }
+    workingArray = newWorkingArray;
+    digitPos++;
+}
+const og_rating = parseInt(workingArray[0], 2);
+
+workingArray = [...b];
+digitPos = 0;
+while(workingArray.length > 1) {
+    const c = 0;
+    const newWorkingArray = [];
+    let count = 0;
+    for(let i=0; i < workingArray.length; i++) {
+        workingArray[i][digitPos] == '1' ? count++ : count--;
+    }
+    let matchTo = count < 0 ? '1' : '0';
+    for(let i=0; i < workingArray.length; i++) {
+        if (workingArray[i][digitPos] == matchTo) {
+            newWorkingArray.push(workingArray[i]);
+        }
+    }
+    workingArray = newWorkingArray;
+    digitPos++;
+}
+const co2_rating = parseInt(workingArray[0], 2);
+console.log('og_rating: ', og_rating, 'co2_rating', co2_rating, 'multiplied', og_rating * co2_rating);
