@@ -9,10 +9,6 @@ export function costCalcPart1(start: number[]): number {
   return minCost;
 }
 
-export function costCalcPart1_alternative(start: number[]): number {
-  
-}
-
 export function costCalcPart2(start: number[]): number {
   let minCost = -1;
   const fuelCost = (horizontalMove: number): number =>
