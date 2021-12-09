@@ -46,7 +46,7 @@ export function identifyDrains(input: string): number {
   }
   const answer = drains
     .sort((l, r) => l.length < r.length ? 1 : -1)
-    .slice(0, 3)
+    .slice(-3)
     .reduce((acc, curr) => acc * curr.length, 1);
   return answer;
 }
